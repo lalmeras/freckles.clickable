@@ -1,17 +1,17 @@
-- name: installing xcode
+- name: "[installing xcode]"
   include_role:
     name: elliotweiser.osx-command-line-tools
 
-- name: install pip (if necessary)
+- name: installing pip (if necessary)
   command: easy_install pip
   args:
     creates: /usr/local/bin/pip
   become: yes
 
-- name: upgrade pip
+- name: upgrading pip
   command: pip install -U pip
   become: yes
 
-- name: install virtualenv (for Mac OS X)
+- name: installing virtualenv (for Mac OS X)
   command: pip install virtualenv
   become: yes

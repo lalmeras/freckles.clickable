@@ -1,11 +1,11 @@
 ---
 # tasks file for python-dev
-- name: check for Mac OS X dependencies
+- name: "[checking for Mac OS X dependencies]"
   include: python-dev-darwin.yml
   static: no
   when: "ansible_os_family == 'Darwin' and (pkg_mgr is not defined or pkg_mgr != 'conda')"
 
-- name: install python dependencies
+- name: installing python dependencies
   include_role:
     name: makkus.install-packages
   vars:
@@ -26,7 +26,7 @@
               - python-pip
             other: omit
 
-- name: "Starting python project setup"
+- name: "[starting python project setup]"
   include: python-dev-item.yml
   static: no
   vars:

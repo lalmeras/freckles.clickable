@@ -16,7 +16,7 @@
     conda_environment: "{{ project_name }}-dev"
     package_install_list: "{{ project_details.get('vars', []) | create_package_list_from_var_filter('packages') }}"
 
-- name: install python dev requirements (into conda environment)
+- name: installing python dev requirements (into conda environment)
   install:
     pkg_mgr: pip
     executable: "~/.local/inaugurate/conda/envs/{{ project_name }}-dev/bin/pip"
@@ -24,7 +24,7 @@
       - "{{ project_path }}/requirements_dev.txt"
   when: "pkg_mgr is defined and pkg_mgr == 'conda'"
 
-- name: install python dev requirements (into virtualenv)
+- name: installing python dev requirements (into virtualenv)
   install:
     pkg_mgr: pip
     #executable: "~/.local/opt/conda/envs/{{ project_name}}-dev/bin/pip"

@@ -32,6 +32,6 @@
   vars:
     project_path: "{{ python_project_item.key }}"
     project_details: "{{ python_project_item.value }}"
-  with_dict: "{{ freckle_profile_folders }}"
+  with_dict: "{{ freckles_profile_folders }}"
   loop_control:
     loop_var: python_project_item

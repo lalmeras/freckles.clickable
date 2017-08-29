@@ -3,7 +3,7 @@
 - name: "[checking for Mac OS X dependencies]"
   include: python-dev-darwin.yml
   static: no
-  when: "ansible_os_family == 'Darwin'
+  when: "ansible_os_family == 'Darwin'"
 
 - name: installing python dependencies
   include_role:

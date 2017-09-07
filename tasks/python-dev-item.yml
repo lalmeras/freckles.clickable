@@ -47,15 +47,25 @@
   with_items:
     - "{{ python_dev_requirements_files | default([]) }}"
 
+- set_fact:
+    setup_command: "python setup.py {{ python_dev_setuptools_command }}"
+  when: "python_dev_setup == 'setuptools'"
 
-- name: "running 'python setup.py {{ python_dev_setup_command }}' in conda environment '{{ env_name }}'"
-  command: "~/.local/inaugurate/conda/envs/{{ env_name }}/bin/python setup.py {{ python_dev_setup_command }}"
+- set_fact:
+    setup_command: "pip install -e ."
+  when: "python_dev_setup == 'pip'"
+
+- fail: msg="Could not determine setup method. 'python_dev_setup' needs to be either 'pip' or 'setuptools'"
+  when: not setup_command
+
+- name: "installing up project into conda environment '{{ env_name }}' (using: '{{ setup_command }}')"
+  command: "~/.local/inaugurate/conda/envs/{{ env_name }}/bin/{{ setup_command }}"
   args:
     chdir: "{{ python_dev_project_path }}"
   when: "pkg_mgr is defined and pkg_mgr == 'conda'"
 
-- name: "running 'python setup.py {{ python_dev_setup_command }}' in  virtualenv '{{ env_name }}'"
-  command: "~/.local/virtualenvs/{{ env_name }}/bin/python setup.py {{ python_dev_setup_command }}"
+- name: "installing up project into virtualenv '{{ env_name }}' (using: '{{ setup_command }}')"
+  command: "~/.local/virtualenvs/{{ env_name }}/bin/{{ setup_command }}"
   args:
     chdir: "{{ python_dev_project_path }}"
   when: "pkg_mgr is not defined or pkg_mgr == 'auto'"

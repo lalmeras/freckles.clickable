@@ -1,3 +1,5 @@
 ---
 # defaults file for python-dev
 pkg_mgr: "auto"
+python_dev_setup_command: "install"
+python_version: 2

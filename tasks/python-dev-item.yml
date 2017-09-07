@@ -64,7 +64,7 @@
     chdir: "{{ python_dev_project_path }}"
   when: "pkg_mgr is defined and pkg_mgr == 'conda'"
 
-- name: "installing up project into virtualenv '{{ env_name }}' (using: '{{ setup_command }}')"
+- name: "installing project into virtualenv '{{ env_name }}' (using: '{{ setup_command }}')"
   command: "~/.local/virtualenvs/{{ env_name }}/bin/{{ setup_command }}"
   args:
     chdir: "{{ python_dev_project_path }}"

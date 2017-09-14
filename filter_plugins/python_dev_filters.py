@@ -5,6 +5,7 @@ try:
 except NameError:
     from sets import Set as set
 
+
 class FilterModule(object):
     def filters(self):
         return {
@@ -12,5 +13,4 @@ class FilterModule(object):
         }
 
     def project_name_filter(self, project_path):
-
         return os.path.basename(project_path)

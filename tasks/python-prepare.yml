@@ -1,8 +1,7 @@
 ---
 # tasks file for python-dev
 - name: "[checking for Mac OS X dependencies]"
-  include: python-dev-darwin.yml
-  static: no
+  include_tasks: python-dev-darwin.yml
   when: "ansible_os_family == 'Darwin'"
 
 - name: installing python dependencies

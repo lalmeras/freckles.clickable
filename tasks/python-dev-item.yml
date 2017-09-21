@@ -58,7 +58,7 @@
 - fail: msg="Could not determine setup method. 'python_dev_setup' needs to be either 'pip' or 'setuptools'"
   when: not setup_command
 
-- name: "installing up project into conda environment '{{ env_name }}' (using: '{{ setup_command }}')"
+- name: "installing project into conda environment '{{ env_name }}' (using: '{{ setup_command }}')"
   command: "~/.local/inaugurate/conda/envs/{{ env_name }}/bin/{{ setup_command }}"
   args:
     chdir: "{{ python_dev_project_path }}"

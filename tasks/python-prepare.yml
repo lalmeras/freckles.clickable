@@ -23,5 +23,9 @@
               - python-dev
               - python-virtualenv
               - python-pip
+            redhat:
+              - python-virtualenv
+              - python-pip
+              - python-devel
             other: omit
 

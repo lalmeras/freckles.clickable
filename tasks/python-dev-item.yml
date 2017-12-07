@@ -6,6 +6,9 @@
   set_fact:
     env_name: "{{ project_name }}-dev"
 
+- debug: var=freckles_user_vars
+- debug: var=pkg_mgr
+
 - name: creating conda environment
   conda:
     name: "python={{ python_version | default(default_python_version) }}"

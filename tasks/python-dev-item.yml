@@ -14,12 +14,12 @@
 
 - name: installing python project dependencies
   include_role:
-    name: makkus.install-packages
+    name: freckles-io.install-packages
   vars:
     profile_name: "project dependency"
     conda_environment: "{{ env_name }}"
     package_install_list: "{{ python_dev_dependency_packages | default([]) }}"
-  when: "pkg_mgr is defined and pkg_mgr == 'conda'"
+#  when: "pkg_mgr is defined and pkg_mgr == 'conda'"
 
 - name: updating pip and setuptools (in conda environment)
   install:
@@ -44,9 +44,11 @@
     - "{{ python_dev_requirements_files | default([]) }}"
 
 - name: create virtualenv
-  command: "virtualenv -p /usr/bin/python{{ python_version }} ~/.virtualenvs/{{ env_name }}"
+  command: "virtualenv -p python{{ python_version }} ~/.virtualenvs/{{ env_name }}"
   args:
     creates: "~/.virtualenvs/{{ env_name }}"
+  environment:
+    PATH: /usr/local/bin:/usr/bin:/bin
   when: "(pkg_mgr is not defined or pkg_mgr == 'auto')"
 
 - name: updating pip and setuptools (in virtualenv)
@@ -58,6 +60,8 @@
     packages:
       - "{{ item }}"
   when: "pkg_mgr is not defined or pkg_mgr == 'auto'"
+  # environment:
+    # PATH: /usr/local/bin:/usr/bin:/bin
   with_items:
     - "pip"
     - "setuptools"
@@ -70,6 +74,8 @@
     packages:
       - "{{ python_dev_project_path }}/{{ item }}"
   when: "pkg_mgr is not defined or pkg_mgr == 'auto'"
+  # environment:
+  #   PATH: /usr/bin:/bin
   with_items:
     - "{{ python_dev_requirements_files | default([]) }}"
 

@@ -3,7 +3,7 @@
     name: freckles-io.install-packages
   vars:
     profile_name: "project dependency"
-    package_install_list: "{{ freckle_vars | assemble_package_list('python_dev_dependency_packages', 'auto') }}"
+    package_install_list: "{{ python_dev_dependency_packages | default([]) }}"
     pkg_mgr: "auto"
 
 # TODO check whether python version is available
@@ -41,7 +41,7 @@
   with_items:
     - "{{ python_dev_requirements_files | default([]) }}"
 
-- name: "installing project into virtualenv '{{ python_dev_project_name }}' (using: '{{ setup_command }}')"
-  command: "~/.virtualenvs/{{ python_dev_project_name }}/bin/{{ setup_command }}"
+- name: "installing project into virtualenv '{{ python_dev_project_name }}' (using: 'clickable-install')"
+  command: "~/.virtualenvs/{{ python_dev_project_name }}/bin/clickable-install"
   args:
     chdir: "{{ python_dev_project_path }}"

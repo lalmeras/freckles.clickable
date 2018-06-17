@@ -1,7 +1,7 @@
 ---
-# tasks file for python-dev
+# tasks file for clickable
 - name: "[checking for Mac OS X dependencies]"
-  include_tasks: python-dev-darwin.yml
+  include_tasks: clickable-darwin.yml
   when: "ansible_os_family == 'Darwin'"
 
 - name: installing python dependencies

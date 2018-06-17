@@ -1,0 +1,12 @@
+- name: "[setting project name]"
+  set_fact:
+    python_dev_project_name: "{{ python_dev_project_path | project_name_filter }}"
+  when: python_dev_project_name is not defined
+
+- name: "[including conda tasks]"
+  include_tasks: python-env-conda.yml
+  when: "python_dev_env_type == 'conda'"
+
+- name: "[including virtualenv tasks]"
+  include_tasks: python-env-virtualenv.yml
+  when: "python_dev_env_type == 'virtualenv'"

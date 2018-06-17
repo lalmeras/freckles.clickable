@@ -1,4 +1,4 @@
 ---
-# main file for python-dev role
+# main file for clickable role
 
 - include_tasks: python-prepare.yml
